@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { BlueGray900, White } from '../../utils/colors';
 import Map from '../molecules/Map';
 
-const ChartContainer = styled.div`
+const DashboardContainer = styled.div`
   width: 100%;
   height: ${window.innerHeight - 160}px;
   color: ${BlueGray900};
@@ -10,10 +10,10 @@ const ChartContainer = styled.div`
   display: flex;
 `;
 
-export default function Chart() {
+export default function Dashboard() {
   return (
-    <ChartContainer>
+    <DashboardContainer>
       <Map />
-    </ChartContainer>
+    </DashboardContainer>
   );
 }
