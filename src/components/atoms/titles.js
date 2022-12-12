@@ -1,18 +1,16 @@
 import styled from 'styled-components';
-import { Blue900, BlueGray900, BlueMyFavorite, Navy } from '../../utils/colors';
 import { tablet } from '../../utils/media';
 
 export const KCPITitle = styled.h1`
   font-weight: 800;
   font-family: 'Nanum Gothic', sans-serif;
-  font-size: 18px;
-  line-height: 32px;
+  font-size: 30px;
+  line-height: 50px;
   word-break: keep-all;
-  color: ${Navy};
 
   @media screen and (${tablet}) {
-    font-size: 24px;
-    line-height: 55px;
+    font-size: 36px;
+    line-height: 70px;
     word-break: keep-all;
   }
 `;

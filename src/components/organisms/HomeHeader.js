@@ -6,7 +6,9 @@ import { KCPITitle } from '../atoms/titles';
 
 const HeaderContainer = styled.header`
   width: 100%;
-  border-radius: 10px;
+  padding: 20px;
+  background-color: ${BlueMyFavorite};
+  color: ${White};
 `;
 
 export default function HomeHeader() {

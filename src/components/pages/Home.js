@@ -1,14 +1,17 @@
-import { useEffect, useRef, useState } from 'react';
-import styled from 'styled-components';
 import Chart from '../organisms/Chart';
 import HomeHeader from '../organisms/HomeHeader';
-import { DefaultTemplate } from '../templates/DefaultTemplate';
+import Navigation from '../organisms/Navigation';
+import { MainTemplate } from '../templates/MainTemplate';
+import { PageTemplate } from '../templates/PageTemplate';
 
 export default function Home() {
   return (
-    <DefaultTemplate>
-      <HomeHeader />
-      <Chart />
-    </DefaultTemplate>
+    <PageTemplate>
+      <Navigation />
+      <MainTemplate>
+        <HomeHeader />
+        <Chart />
+      </MainTemplate>
+    </PageTemplate>
   );
 }

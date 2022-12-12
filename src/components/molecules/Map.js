@@ -1,5 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
+
+import MapChart from './chartDrawer/MapChart';
 import { White } from '../../utils/colors';
 import { tablet } from '../../utils/media';
 
@@ -21,9 +23,9 @@ export default function Map({ hoveredCity, SelectedCity }) {
 
   useEffect(() => {
     if (!map) {
-      setMap('메롱');
+      setMap(new MapChart(mapContainer.current));
     } else {
-      console.log('testing');
+      console.log(map);
     }
   }, [map]);
 
