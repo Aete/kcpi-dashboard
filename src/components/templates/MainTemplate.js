@@ -1,6 +1,6 @@
 import styled from 'styled-components';
-import { tablet } from '../../utils/media';
-import { NavWidth } from '../organisms/Navigation';
+import { pc, tablet } from '../../utils/media';
+import { NavWidth, NavWidthPC, NavWidthTab } from '../organisms/Navigation';
 
 export const MainTemplate = styled.div`
   width: 100%;
@@ -9,6 +9,6 @@ export const MainTemplate = styled.div`
   flex-direction: column;
 
   @media screen and (${tablet}) {
-    margin-left: ${NavWidth};
+    margin-left: ${NavWidthTab};
   }
 `;

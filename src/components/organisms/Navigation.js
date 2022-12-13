@@ -1,26 +1,30 @@
 import styled from 'styled-components';
 import {
-  Blue50,
+  BlueGray900,
   BlueGray100,
-  BlueGray50,
-  BlueMyFavorite,
+  Secondary,
   NavBackground,
   White,
+  Blue50,
+  DarkNavy,
 } from '../../utils/colors';
-import { mobile, tablet } from '../../utils/media';
+import { pc, tablet } from '../../utils/media';
 
-export const NavWidth = `${90}px`;
+export const NavWidthTab = `${75}px`;
 
 const NavContainer = styled.div`
   display: flex;
   width: 100%;
   height: 70px;
+  background-color: ${BlueGray100};
+
   position: fixed;
   bottom: 0;
-  background-color: #001945;
-  color: ${White};
+
+  color: ${BlueGray900};
+
   @media screen and (${tablet}) {
-    width: ${NavWidth};
+    width: ${NavWidthTab};
     height: 100vh;
     display: flex;
     flex-direction: column;

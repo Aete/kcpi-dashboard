@@ -10,11 +10,11 @@ export const Blue = '#2196f3';
 export const Blue50 = '#e3f2fd';
 export const Blue900 = '#0d47a1';
 export const BlueMyFavorite = '#0058ca';
-export const BlueMyFavoriteText = '#0058ca';
+export const BlueMyFavoriteText = '#001945';
 
-export const NavBackground = '#d9e2ff';
+export const NavBackground = '#e3e2e6';
 
-export const Secondary = '#4c56af';
+export const Secondary = '#001d36';
 
 export const Navy = '#1a237e';
 export const DarkNavy = '#001945';

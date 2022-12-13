@@ -1,6 +1,12 @@
 import styled from 'styled-components';
 import Home from './components/pages/Home';
-import { Background } from './utils/colors';
+import {
+  Background,
+  Blue,
+  BlueGray50,
+  NavBackground,
+  White,
+} from './utils/colors';
 
 const AppContainer = styled.div`
   width: 100vw;
@@ -8,7 +14,7 @@ const AppContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: flex-start;
-  background-color: ${Background};
+  background-color: ${BlueGray50};
 `;
 
 function App() {

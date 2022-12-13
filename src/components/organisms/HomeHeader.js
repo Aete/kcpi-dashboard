@@ -1,13 +1,24 @@
 import styled from 'styled-components';
-import { Navy, BlueMyFavorite, White, BlueGray900 } from '../../utils/colors';
+import {
+  Navy,
+  BlueMyFavorite,
+  White,
+  BlueGray900,
+  DarkNavy,
+  BlueMyFavoriteText,
+} from '../../utils/colors';
 import { kcpiDescription } from '../../utils/text/home';
 import { TextHeader } from '../atoms/text';
 import { KCPITitle } from '../atoms/titles';
 
 const HeaderContainer = styled.header`
   width: 100%;
-  padding: 20px;
-  background-color: ${BlueMyFavorite};
+  min-height: 120px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 20px 20px;
+  background-color: ${BlueGray900};
   color: ${White};
 `;
 
