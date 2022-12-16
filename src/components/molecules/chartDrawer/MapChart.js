@@ -1,12 +1,5 @@
 import * as d3 from 'd3';
-import { thresholdScott } from 'd3';
-import {
-  BlueGray100,
-  BlueGray900,
-  DarkNavy,
-  LightGray350,
-  White,
-} from '../../../utils/colors';
+import { LightGray100, LightGray350, Black } from '../../../utils/colors';
 import sido from '../../../utils/data/geo/sido.geojson';
 
 export default function MapChart(element, setCity) {
@@ -25,32 +18,44 @@ export default function MapChart(element, setCity) {
 
   const container = svg.append('g').attr('class', 'map');
 
+  const boxContainer = svg.append('g').attr('class', 'box');
+
+  boxContainer
+    .append('rect')
+    .attr('width', 0.5 * width)
+    .attr('height', 0.3 * height)
+    .attr('fill', 'White')
+    .attr('visibility', 'visible');
+
   d3.json(sido).then((d) => {
     const projection = d3.geoMercator().fitSize([width, height], d);
     const path = d3.geoPath().projection(projection);
+
+    // drawing map
     container
       .selectAll('.sido')
       .data(d.features)
       .join('path')
       .attr('class', 'sido')
       .attr('d', path)
-      .attr('fill', White)
-      .attr('stroke', LightGray350)
+      .attr('fill', LightGray100)
+      .attr('stroke', '#ececec')
       .on('mouseover', function () {
         const city = d3.select(this).data()[0].properties.NAME;
-        if (city !== store.city) d3.select(this).attr('fill', BlueGray100);
+        if (city !== store.city) d3.select(this).attr('fill', LightGray350);
       })
       .on('mouseout', function () {
         const city = d3.select(this).data()[0].properties.NAME;
-        if (city !== store.city) d3.select(this).attr('fill', White);
+        if (city !== store.city) d3.select(this).attr('fill', LightGray100);
       })
       .on('click', function () {
         const city = d3.select(this).data()[0].properties.NAME;
-        d3.selectAll('.sido').attr('fill', White);
+        boxContainer.attr('width');
+        d3.selectAll('.sido').attr('fill', LightGray100);
         if (city !== store.city) {
           setCity(city);
           store.city = city;
-          d3.select(this).attr('fill', BlueGray900);
+          d3.select(this).attr('fill', Black);
         } else {
           setCity(null);
           store.city = null;

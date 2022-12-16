@@ -1,9 +1,9 @@
-import { useEffect, useState } from "react";
-import styled from "styled-components";
-import { BlueGray900 } from "../../utils/colors";
-import { tablet } from "../../utils/media";
-import ChartSet from "../molecules/Chartset";
-import Map from "../molecules/Map";
+import { useEffect, useState } from 'react';
+import styled from 'styled-components';
+import { BlueGray900 } from '../../utils/colors';
+import { tablet } from '../../utils/media';
+import ChartSet from '../molecules/Chartset';
+import Map from '../molecules/Map';
 
 const DashboardContainer = styled.div`
   width: 100%;
@@ -25,9 +25,7 @@ export default function Dashboard() {
   const [sCity, setSCity] = useState(null);
   const [hCity, setHCity] = useState(null);
 
-  useEffect(() => {
-    console.log(sCity);
-  }, [sCity]);
+  useEffect(() => {}, [sCity]);
 
   return (
     <DashboardContainer height={height}>
