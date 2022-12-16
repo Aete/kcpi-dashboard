@@ -8,7 +8,6 @@ import { tablet } from "../../utils/media";
 const MapContainer = styled.div`
   width: 100%;
   background-color: ${Background};
-  padding: 20px;
 
   @media screen and (${tablet}) {
     width: ${(window.innerHeight - 150) / 3 > 450
