@@ -1,15 +1,8 @@
-import styled from 'styled-components';
-import {
-  Navy,
-  BlueMyFavorite,
-  White,
-  BlueGray900,
-  DarkNavy,
-  BlueMyFavoriteText,
-} from '../../utils/colors';
-import { kcpiDescription } from '../../utils/text/home';
-import { TextHeader } from '../atoms/text';
-import { KCPITitle } from '../atoms/titles';
+import styled from "styled-components";
+import { Background, Black, BlueGray900 } from "../../utils/colors";
+import { kcpiDescription } from "../../utils/text/home";
+import { TextHeader } from "../atoms/text";
+import { KCPITitle } from "../atoms/titles";
 
 const HeaderContainer = styled.header`
   width: 100%;
@@ -18,8 +11,8 @@ const HeaderContainer = styled.header`
   flex-direction: column;
   justify-content: space-between;
   padding: 20px 20px;
-  background-color: ${BlueGray900};
-  color: ${White};
+  background-color: ${Background};
+  color: ${Black};
 `;
 
 export default function HomeHeader() {
@@ -28,7 +21,7 @@ export default function HomeHeader() {
     <HeaderContainer>
       <KCPITitle>
         대한민국 도시번영지수
-        {width < 450 ? <br /> : ' '}
+        {width < 450 ? <br /> : " "}
         (K-CPI)
       </KCPITitle>
       <TextHeader>{kcpiDescription}</TextHeader>

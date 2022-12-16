@@ -1,13 +1,13 @@
-import { useEffect, useState } from 'react';
-import styled from 'styled-components';
-import { BlueGray900 } from '../../utils/colors';
-import { tablet } from '../../utils/media';
-import ChartSet from '../molecules/Chartset';
-import Map from '../molecules/Map';
+import { useEffect, useState } from "react";
+import styled from "styled-components";
+import { BlueGray900 } from "../../utils/colors";
+import { tablet } from "../../utils/media";
+import ChartSet from "../molecules/Chartset";
+import Map from "../molecules/Map";
 
 const DashboardContainer = styled.div`
   width: 100%;
-  max-height: ${(props) => props.height}px;
+  height: ${(props) => props.height}px;
   color: ${BlueGray900};
   margin-top: 30px;
   display: flex;
