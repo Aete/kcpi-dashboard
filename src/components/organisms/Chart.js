@@ -25,7 +25,7 @@ export default function Dashboard() {
   const [sCity, setSCity] = useState(null);
   const [hCity, setHCity] = useState(null);
 
-  useEffect(() => {}, [sCity]);
+  useEffect(() => {}, [hCity]);
 
   return (
     <DashboardContainer height={height}>

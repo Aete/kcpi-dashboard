@@ -1,8 +1,8 @@
-import styled from "styled-components";
-import { Background, Black } from "../../utils/colors";
-import { pc, tablet } from "../../utils/media";
+import styled from 'styled-components';
+import { Background, Black } from '../../utils/colors';
+import { pc, tablet } from '../../utils/media';
 
-export const NavWidthTab = `${120}px`;
+export const NavWidthTab = `${75}px`;
 
 const NavContainer = styled.div`
   display: flex;

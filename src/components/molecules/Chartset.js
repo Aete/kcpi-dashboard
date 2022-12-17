@@ -10,7 +10,7 @@ const ChartContainer = styled.div`
   padding: 0 20px 0 0;
 
   @media screen and (${tablet}) {
-    width: calc(100% - 430px);
+    width: calc(50% - 40px);
     margin-left: 20px;
   }
 

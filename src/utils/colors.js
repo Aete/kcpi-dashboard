@@ -23,7 +23,12 @@ export const DarkNavy = '#001945';
 export const White = '#fff';
 
 export const Black = '#212121';
+export const Black400 = '#bdbdbd';
 export const Black800 = '#424242';
+export const Black600 = '#757575';
+
 export const LightGray = '#e2dfdf';
 
 export const Red = '#f44336';
+
+export const Yello = '#ffb74d';

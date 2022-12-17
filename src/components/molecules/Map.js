@@ -1,19 +1,17 @@
-import { useEffect, useRef, useState } from "react";
-import styled from "styled-components";
+import { useEffect, useRef, useState } from 'react';
+import styled from 'styled-components';
 
-import MapChart from "./chartDrawer/MapChart";
-import { Background } from "../../utils/colors";
-import { tablet } from "../../utils/media";
+import MapChart from './chartDrawer/MapChart';
+import { Background, Black } from '../../utils/colors';
+import { tablet } from '../../utils/media';
 
 const MapContainer = styled.div`
   width: 100%;
   background-color: ${Background};
 
   @media screen and (${tablet}) {
-    width: ${(window.innerHeight - 150) / 3 > 450
-      ? window.innerHeight / 3
-      : 450}px;
-    max-width: 900px;
+    width: 50%;
+    max-width: 450px;
   }
 `;
 
@@ -23,9 +21,9 @@ export default function Map({ setHCity, setSCity }) {
 
   useEffect(() => {
     if (!map) {
-      setMap(new MapChart(mapContainer.current, setSCity));
+      setMap(new MapChart(mapContainer.current, setSCity, setHCity));
     } else {
-      console.log(map);
+      window.addEventListener('resize', map.redraw);
     }
   }, [map]);
 
