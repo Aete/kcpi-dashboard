@@ -31,4 +31,4 @@ export const LightGray = '#e2dfdf';
 
 export const Red = '#f44336';
 
-export const Yello = '#ffb74d';
+export const Yellow = '#ffb74d';

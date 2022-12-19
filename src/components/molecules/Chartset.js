@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { White } from '../../utils/colors';
 import { tablet } from '../../utils/media';
 import Overall from './charts/main/Overall';
-import ChartSubSet from './ChartSubSet';
+import DataTable from './charts/main/DataTable';
 
 const ChartContainer = styled.div`
   height: 100%;
@@ -23,7 +23,6 @@ export default function ChartSet() {
   return (
     <ChartContainer>
       <Overall />
-      <ChartSubSet />
     </ChartContainer>
   );
 }

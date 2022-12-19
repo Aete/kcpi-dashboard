@@ -1,27 +1,27 @@
-import { Black400, BlueMyFavorite, Yello } from "../../../utils/colors";
+import { Black400, BlueMyFavorite, Yellow } from '../../../utils/colors';
 
 export default function Hexagon(element, width, height) {
-  const hexagon = element.append("g").attr("id", "hexagon");
+  const hexagon = element.append('g').attr('id', 'hexagon');
 
-  const hexagonGrid = hexagon.append("g");
+  const hexagonGrid = hexagon.append('g');
 
-  const hexMean = hexagon.append("g");
-  const hexChart = hexagon.append("g");
+  const hexMean = hexagon.append('g');
+  const hexChart = hexagon.append('g');
   const cx = 0.5 * width;
-  const cy = 0.6 * height;
+  const cy = 0.55 * height;
   const rScale = (d) => (d / 100) * 0.42 * width;
 
   // create Grid
   hexagonGrid
-    .selectAll(".xAxis")
+    .selectAll('.xAxis')
     .data([100, 80, 60, 40, 20])
-    .join("polygon")
-    .attr("stroke", Black400)
-    .attr("stroke-dasharray", "3,3")
-    .attr("stroke-width", 0.7)
-    .attr("fill", "none")
+    .join('polygon')
+    .attr('stroke', Black400)
+    .attr('stroke-dasharray', '3,3')
+    .attr('stroke-width', 0.7)
+    .attr('fill', 'none')
     .attr(
-      "points",
+      'points',
       (d) => `
       ${cx},${cy + rScale(d)} 
       ${cx + Math.cos(Math.PI / 6) * rScale(d)}, ${
@@ -40,123 +40,131 @@ export default function Hexagon(element, width, height) {
     );
 
   hexagonGrid
-    .selectAll(".yAxis")
+    .selectAll('.yAxis')
     .data([0, 1, 2, 3, 4, 5, 6])
-    .join("line")
-    .attr("transform", (d) => `rotate(${60 + d * 60}, ${cx}, ${cy})`)
-    .attr("stroke-dasharray", "3,3")
-    .attr("stroke", Black400)
-    .attr("stroke-width", 0.7)
-    .attr("x1", cx)
-    .attr("y1", cy)
-    .attr("x2", cx)
-    .attr("y2", cy + rScale(100));
+    .join('line')
+    .attr('transform', (d) => `rotate(${60 + d * 60}, ${cx}, ${cy})`)
+    .attr('stroke-dasharray', '3,3')
+    .attr('stroke', Black400)
+    .attr('stroke-width', 0.7)
+    .attr('x1', cx)
+    .attr('y1', cy)
+    .attr('x2', cx)
+    .attr('y2', cy + rScale(100));
 
-  const sample = {
-    P: 80,
-    ID: 85,
-    QoL: 75,
-    ESI: 78,
-    ES: 85,
-    UGL: 40,
+  const sampleMean = {
+    p: 61,
+    id: 67,
+    qol: 64,
+    esi: 69,
+    es: 59,
+    ugl: 73,
   };
 
-  (() => {
-    let meanString = "";
+  const drawChart = (element, data, color, main) => {
+    let coordString = '';
+    Object.entries(data)
+      .filter((data) => data[0] !== 'city')
+      .forEach(([c, d], i) => {
+        const { dx, dy } = convertCoord(c, d, rScale);
+        element
+          .append('circle')
+          .attr('r', main === true ? '4' : '3')
+          .attr('fill', color)
+          .attr('cx', cx + dx)
+          .attr('cy', cy + dy);
+        coordString += `${cx + dx},${cy + dy} `;
+      });
 
-    const sampleMean = {
-      P: 60,
-      ID: 60,
-      QoL: 60,
-      ESI: 60,
-      ES: 60,
-      UGL: 60,
-    };
+    element
+      .append('polygon')
+      .attr('points', coordString)
+      .attr('stroke', color)
+      .attr('stroke-width', main === true ? '2' : '2')
+      .attr('stroke-dasharray', main === true ? 'none' : '4,4')
+      .attr('fill', 'none');
 
-    Object.entries(sampleMean).forEach(([c, d], i) => {
-      const { dx, dy } = convertCoord(c, d, rScale);
-      hexMean
-        .append("circle")
-        .attr("r", "3")
-        .attr("fill", Yello)
-        .attr("cx", cx + dx)
-        .attr("cy", cy + dy);
-      meanString += `${cx + dx},${cy + dy} `;
-    });
+    element
+      .append('polygon')
+      .attr('points', coordString)
+      .attr('stroke', 'none')
+      .attr('fill', color)
+      .attr('opacity', '0.3');
+  };
 
-    hexMean
-      .append("polygon")
-      .attr("points", meanString)
-      .attr("stroke", Yello)
-      .attr("stroke-width", 2)
-      .attr("stroke-dasharray", "4,4")
-      .attr("fill", "none");
+  const drawText = (element) => {
+    element
+      .selectAll('.grid-text')
+      .data(['P', 'ID', 'QoL', 'ESI', 'ES', 'UGL'])
+      .join('text')
+      .text((t) => t)
+      .attr('text-anchor', 'middle')
+      .attr('x', (t) => cx + convertCoord(t, 110, rScale).dx)
+      .attr('y', (t) => cy + convertCoord(t, 110, rScale).dy)
+      .attr('dy', 3)
+      .style('font-family', 'Pretendard, sans-serif')
+      .style('font-size', '14px');
+  };
 
-    hexMean
-      .append("polygon")
-      .attr("points", meanString)
-      .attr("stroke", "none")
-      .attr("fill", Yello)
-      .attr("opacity", "0.3");
-  })();
+  drawChart(hexMean, sampleMean, Yellow, false);
+  drawText(hexMean);
 
   this.draw = (data) => {
-    const entries = Object.entries(data);
-    let coordString = "";
+    const city = data.city;
+    console.log(city);
 
-    entries.forEach(([c, d], i) => {
-      const { dx, dy } = convertCoord(c, d, rScale);
-      hexChart
-        .append("circle")
-        .attr("r", "4.5")
-        .attr("fill", BlueMyFavorite)
-        .attr("cx", cx + dx)
-        .attr("cy", cy + dy);
-      coordString += `${cx + dx},${cy + dy} `;
-    });
+    hexChart.selectAll('polygon').remove();
+    hexChart.selectAll('circle').remove();
+    hexChart.select('text').remove();
+
+    drawChart(hexChart, data, BlueMyFavorite, true);
 
     hexChart
-      .append("polygon")
-      .attr("points", coordString)
-      .attr("stroke", BlueMyFavorite)
-      .attr("stroke-width", 2)
-      .attr("fill", "none");
-
-    hexChart
-      .append("polygon")
-      .attr("points", coordString)
-      .attr("stroke", "none")
-      .attr("fill", BlueMyFavorite)
-      .attr("opacity", "0.3");
+      .append('text')
+      .attr('id', 'tooltip-title')
+      .text(city)
+      .attr('x', 10)
+      .attr('y', 20)
+      .style('font-family', 'Pretendard, sans-serif')
+      .style('font-weight', 700)
+      .style('font-size', '14px');
   };
-
-  this.draw(sample);
 }
 
 function convertCoord(category, data, rScale) {
   switch (category) {
-    case "P":
+    case 'p':
+    case 'P':
       return { dx: 0, dy: -rScale(data) };
-    case "ID":
+
+    case 'ID':
+    case 'id':
       return {
         dx: Math.cos(Math.PI / 6) * rScale(data),
         dy: -Math.sin(Math.PI / 6) * rScale(data),
       };
-    case "QoL":
+
+    case 'QoL':
+    case 'qol':
       return {
         dx: Math.cos(Math.PI / 6) * rScale(data),
         dy: Math.sin(Math.PI / 6) * rScale(data),
       };
-    case "ESI":
+
+    case 'ESI':
+    case 'esi':
       return {
         dx: 0,
         dy: rScale(data),
       };
-    case "ES":
+
+    case 'ES':
+    case 'es':
       return {
         dx: -Math.cos(Math.PI / 6) * rScale(data),
         dy: Math.sin(Math.PI / 6) * rScale(data),
       };
+
     default:
       return {
         dx: -Math.cos(Math.PI / 6) * rScale(data),
