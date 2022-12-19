@@ -9,7 +9,6 @@ const DashboardContainer = styled.div`
   width: 100%;
   height: ${(props) => props.height}px;
   color: ${BlueGray900};
-  margin-top: 30px;
   display: flex;
   flex-direction: column;
   padding: 0 20px;
@@ -25,12 +24,15 @@ export default function Dashboard() {
   const [sCity, setSCity] = useState(null);
   const [hCity, setHCity] = useState(null);
 
-  useEffect(() => {}, [hCity]);
-
   return (
     <DashboardContainer height={height}>
-      <Map setHCity={setHCity} setSCity={setSCity} />
-      <ChartSet setHCity={setHCity} setSCity={setSCity} />
+      <Map sCity={sCity} setHCity={setHCity} setSCity={setSCity} />
+      <ChartSet
+        sCity={sCity}
+        hCity={hCity}
+        setHCity={setHCity}
+        setSCity={setSCity}
+      />
     </DashboardContainer>
   );
 }

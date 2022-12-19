@@ -111,7 +111,6 @@ export default function Hexagon(element, width, height) {
 
   this.draw = (data) => {
     const city = data.city;
-    console.log(city);
 
     hexChart.selectAll('polygon').remove();
     hexChart.selectAll('circle').remove();
@@ -139,6 +138,7 @@ function convertCoord(category, data, rScale) {
 
     case 'ID':
     case 'id':
+    case 'infra':
       return {
         dx: Math.cos(Math.PI / 6) * rScale(data),
         dy: -Math.sin(Math.PI / 6) * rScale(data),

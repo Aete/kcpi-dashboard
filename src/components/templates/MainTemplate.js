@@ -1,6 +1,6 @@
-import styled from "styled-components";
-import { pc, tablet } from "../../utils/media";
-import { NavWidth, NavWidthPC, NavWidthTab } from "../organisms/Navigation";
+import styled from 'styled-components';
+import { pc, tablet } from '../../utils/media';
+import { NavWidth, NavWidthPC, NavWidthTab } from '../organisms/Navigation';
 
 export const MainTemplate = styled.div`
   width: 100%;
@@ -10,6 +10,5 @@ export const MainTemplate = styled.div`
 
   @media screen and (${tablet}) {
     margin-left: ${NavWidthTab};
-    padding-left: 20px;
   }
 `;

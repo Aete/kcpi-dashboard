@@ -15,7 +15,7 @@ const MapContainer = styled.div`
   }
 `;
 
-export default function Map({ setHCity, setSCity }) {
+export default function Map({ sCity, setHCity, setSCity }) {
   const [map, setMap] = useState(null);
   const mapContainer = useRef();
 
@@ -23,9 +23,9 @@ export default function Map({ setHCity, setSCity }) {
     if (!map) {
       setMap(new MapChart(mapContainer.current, setSCity, setHCity));
     } else {
-      window.addEventListener('resize', map.redraw);
+      sCity && map.redraw(sCity);
     }
-  }, [map]);
+  }, [map, sCity]);
 
   return <MapContainer ref={mapContainer}></MapContainer>;
 }

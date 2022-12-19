@@ -13,6 +13,8 @@ import Tooltip from './Tooltip';
 export default function MapChart(element, setSCity, setHCity) {
   const store = {
     city: null,
+    projection: null,
+    cityData: null,
   };
   const height = element.clientHeight;
   const width = element.clientWidth;
@@ -26,7 +28,7 @@ export default function MapChart(element, setSCity, setHCity) {
   const container = svg
     .append('g')
     .attr('class', 'map')
-    .attr('transform', 'translate(75,150)');
+    .attr('transform', 'translate(75,120)');
 
   // create container
 
@@ -34,7 +36,7 @@ export default function MapChart(element, setSCity, setHCity) {
   const mapContainer = container.append('g');
 
   // tooltip
-  const tooltipWidth = 200;
+  const tooltipWidth = 180;
 
   // create the Tooltip and Chart elements
   const boxContainer = Tooltip(container, tooltipWidth);
@@ -43,10 +45,13 @@ export default function MapChart(element, setSCity, setHCity) {
   // load data and draw the map + events
   Promise.all([d3.csv(cityData, d3.autoType), d3.json(sido)]).then(
     ([citySample, d]) => {
-      const projection = d3
+      store.projection = store.projection = d3
         .geoMercator()
         .fitSize([width - 150, height - 150], d);
-      const path = d3.geoPath().projection(projection);
+
+      store.cityData = citySample;
+
+      const path = d3.geoPath().projection(store.projection);
 
       // Create a background rect for removing the tooltip when a user click empty space
       mapContainer
@@ -82,30 +87,39 @@ export default function MapChart(element, setSCity, setHCity) {
         })
         .on('click', function () {
           const city = d3.select(this).data()[0].properties.NAME;
-          const coord = projection(d3.geoCentroid(d3.select(this).data()[0]));
-          boxContainer
-            .attr(
-              'transform',
-              `translate(${[
-                coord[0] - tooltipWidth / 2,
-                coord[1] - 1.2 * tooltipWidth - 10,
-              ]})`
-            )
-            .style('display', 'inline');
-
-          d3.selectAll('.sido').attr('fill', LightGray100);
-          if (city !== store.city) {
-            setSCity(city);
-            store.city = city;
-            d3.select(this).attr('fill', Black);
-            const cityData = citySample.filter((c) => c.city === city)[0];
-            Chart.draw(cityData);
-          } else {
-            setSCity(null);
-            store.city = null;
-            boxContainer.style('display', 'none');
-          }
+          setSCity(city);
         });
     }
   );
+
+  this.redraw = (city) => {
+    const selected = d3.selectAll('.sido').filter((d, i) => {
+      return d.properties.NAME === city;
+    });
+    if (store.projection) {
+      const coord = store.projection(d3.geoCentroid(selected.data()[0]));
+
+      boxContainer
+        .attr(
+          'transform',
+          `translate(${[
+            coord[0] - tooltipWidth / 2,
+            coord[1] - 1.2 * tooltipWidth - 10,
+          ]})`
+        )
+        .style('display', 'inline');
+
+      d3.selectAll('.sido').attr('fill', LightGray100);
+
+      if (city !== store.city) {
+        store.city = city;
+        selected.attr('fill', Black);
+        const cityData = store.cityData.filter((c) => c.city === city)[0];
+        Chart.draw(cityData);
+      } else {
+        store.city = null;
+        boxContainer.style('display', 'none');
+      }
+    }
+  };
 }

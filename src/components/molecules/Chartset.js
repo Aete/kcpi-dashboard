@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { White } from '../../utils/colors';
 import { tablet } from '../../utils/media';
 import Overall from './charts/main/Overall';
-import DataTable from './charts/main/DataTable';
+import OverallTable from './charts/main/OverallTable';
 
 const ChartContainer = styled.div`
   height: 100%;
@@ -19,10 +19,11 @@ const ChartContainer = styled.div`
   justify-content: space-between;
 `;
 
-export default function ChartSet() {
+export default function ChartSet({ sCity, hCity, setSCity }) {
   return (
     <ChartContainer>
-      <Overall />
+      <Overall setSCity={setSCity} />
+      <OverallTable sCity={sCity} hCity={hCity} setSCity={setSCity} />
     </ChartContainer>
   );
 }
