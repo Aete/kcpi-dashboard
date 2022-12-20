@@ -7,7 +7,7 @@ export const MainTemplate = styled.div`
   height: 100%;
   display: flex;
   flex-direction: column;
-
+  position: relative;
   @media screen and (${tablet}) {
     margin-left: ${NavWidthTab};
   }

@@ -1,3 +1,13 @@
+export const calculateOverallEntry = (preData) => {
+  return preData.map((d) => {
+    const overall =
+      Object.entries(d)
+        .filter((entry) => entry[0] !== 'city')
+        .reduce((acc, value) => acc + value[1], 0) / 6;
+    return [d.city, overall];
+  });
+};
+
 export const data = [
   {
     city: '서울',
@@ -152,4 +162,13 @@ export const data = [
     es: 67,
     ugl: 46,
   },
-];
+]
+  .map((d) => {
+    d.overall = Math.round(
+      Object.entries(d)
+        .filter((entry) => entry[0] !== 'city')
+        .reduce((acc, value) => acc + value[1], 0) / 6
+    );
+    return d;
+  })
+  .sort((a, b) => b.overall - a.overall);

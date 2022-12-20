@@ -29,6 +29,15 @@ const columns = [
     headerClassName: 'tableHeader',
   },
   {
+    field: 'overall',
+    headerName: '종합',
+    type: 'number',
+    align: 'center',
+    headerAlign: 'center',
+    headerClassName: 'tableHeader',
+    flex: 1,
+  },
+  {
     field: 'p',
     headerName: '생산성',
     type: 'number',
@@ -101,9 +110,17 @@ const columns = [
   },
 ];
 
-export default function OverallTable({ sCity, hCity, setSCity }) {
+export default function OverallTable({ sCity, hCity, setSCity, setHCity }) {
   const handleClick = (params, event, details) => {
     setSCity(params.row.city);
+  };
+
+  const handleOver = (params) => {
+    setHCity(params.target.parentNode.dataset.id);
+  };
+
+  const handleLeave = (params) => {
+    setHCity(null);
   };
 
   return (
@@ -112,6 +129,7 @@ export default function OverallTable({ sCity, hCity, setSCity }) {
         height: '75%',
         color: Black,
         flexGrow: 1,
+        cursor: 'pointer',
         marginTop: '20px',
         '& .MuiDataGrid-root': {
           fontFamily: 'Pretendard, sans-serif',
@@ -131,6 +149,10 @@ export default function OverallTable({ sCity, hCity, setSCity }) {
           fontWeight: 700,
         },
 
+        '& .Mui-selected.MuiDataGrid-row': {
+          backgroundColor: 'transparent',
+        },
+
         '& .hCity': {
           color: Red,
           fontWeight: 700,
@@ -148,6 +170,12 @@ export default function OverallTable({ sCity, hCity, setSCity }) {
           if (row.id === hCity) return 'hCity';
 
           return '';
+        }}
+        componentsProps={{
+          row: {
+            onMouseLeave: handleLeave,
+            onMouseEnter: handleOver,
+          },
         }}
       />
     </Box>

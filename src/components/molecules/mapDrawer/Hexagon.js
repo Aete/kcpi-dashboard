@@ -1,15 +1,15 @@
-import { Black400, BlueMyFavorite, Yellow } from '../../../utils/colors';
+import { Black400, BlueMyFavorite, Red, Yellow } from '../../../utils/colors';
 
 export default function Hexagon(element, width, height) {
   const hexagon = element.append('g').attr('id', 'hexagon');
 
   const hexagonGrid = hexagon.append('g');
-
   const hexMean = hexagon.append('g');
   const hexChart = hexagon.append('g');
+
   const cx = 0.5 * width;
   const cy = 0.55 * height;
-  const rScale = (d) => (d / 100) * 0.42 * width;
+  const rScale = (d) => (d / 100) * 0.4 * width;
 
   // create Grid
   hexagonGrid
@@ -69,7 +69,7 @@ export default function Hexagon(element, width, height) {
         const { dx, dy } = convertCoord(c, d, rScale);
         element
           .append('circle')
-          .attr('r', main === true ? '4' : '3')
+          .attr('r', main === true ? '4' : '2')
           .attr('fill', color)
           .attr('cx', cx + dx)
           .attr('cy', cy + dy);
@@ -99,11 +99,11 @@ export default function Hexagon(element, width, height) {
       .join('text')
       .text((t) => t)
       .attr('text-anchor', 'middle')
-      .attr('x', (t) => cx + convertCoord(t, 110, rScale).dx)
-      .attr('y', (t) => cy + convertCoord(t, 110, rScale).dy)
+      .attr('x', (t) => cx + convertCoord(t, 120, rScale).dx)
+      .attr('y', (t) => cy + convertCoord(t, 120, rScale).dy)
       .attr('dy', 3)
-      .style('font-family', 'Pretendard, sans-serif')
-      .style('font-size', '14px');
+      .style('font-family', "'Nanum Gothic', sans-serif")
+      .style('font-size', '10px');
   };
 
   drawChart(hexMean, sampleMean, Yellow, false);
@@ -121,12 +121,12 @@ export default function Hexagon(element, width, height) {
     hexChart
       .append('text')
       .attr('id', 'tooltip-title')
-      .text(city)
+      .text(`${city}: ${data.overall}점`)
       .attr('x', 10)
       .attr('y', 20)
-      .style('font-family', 'Pretendard, sans-serif')
+      .style('font-family', "'Nanum Gothic', sans-serif")
       .style('font-weight', 700)
-      .style('font-size', '14px');
+      .style('font-size', '13px');
   };
 }
 

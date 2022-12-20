@@ -6,21 +6,20 @@ export const NavWidthTab = `${75}px`;
 
 const NavContainer = styled.div`
   display: flex;
-  width: 100%;
-  height: 70px;
+  width: ${NavWidthTab};
+  height: 100vh;
   background-color: ${Background};
 
-  position: fixed;
-  bottom: 0;
+  position: absolute;
+  left: -${NavWidthTab};
+  top: 0;
 
   color: ${Black};
+  flex-direction: column;
+  border-right: 1px solid ${Black};
 
-  @media screen and (${tablet}) {
-    width: ${NavWidthTab};
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    border-right: 1px solid ${Black};
+  @media screen and (${pc}) {
+    left: 0;
   }
 `;
 

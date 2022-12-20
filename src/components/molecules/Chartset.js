@@ -1,6 +1,5 @@
 import styled from 'styled-components';
-import { White } from '../../utils/colors';
-import { tablet } from '../../utils/media';
+import { pc, tablet } from '../../utils/media';
 import Overall from './charts/main/Overall';
 import OverallTable from './charts/main/OverallTable';
 
@@ -10,8 +9,13 @@ const ChartContainer = styled.div`
   padding: 0 20px 0 0;
 
   @media screen and (${tablet}) {
-    width: calc(50% - 40px);
+    width: 100%;
     margin-left: 20px;
+  }
+
+  @media screen and (${pc}) {
+    width: calc(100% - 450px);
+    max-width: 900px;
   }
 
   display: flex;
@@ -19,11 +23,21 @@ const ChartContainer = styled.div`
   justify-content: space-between;
 `;
 
-export default function ChartSet({ sCity, hCity, setSCity }) {
+export default function ChartSet({ sCity, hCity, setSCity, setHCity }) {
   return (
     <ChartContainer>
-      <Overall setSCity={setSCity} />
-      <OverallTable sCity={sCity} hCity={hCity} setSCity={setSCity} />
+      <Overall
+        sCity={sCity}
+        hCity={hCity}
+        setSCity={setSCity}
+        setHCity={setHCity}
+      />
+      <OverallTable
+        sCity={sCity}
+        hCity={hCity}
+        setSCity={setSCity}
+        setHCity={setHCity}
+      />
     </ChartContainer>
   );
 }
