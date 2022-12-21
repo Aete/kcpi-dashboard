@@ -138,7 +138,6 @@ export default function MapChart(element, setSCity, setHCity, sCity) {
       selected.attr('fill', Black);
 
       const cityData = store.cityData.filter((c) => c.city === city)[0];
-      console.log(city, cityData);
       Chart.draw(cityData);
     }
   };

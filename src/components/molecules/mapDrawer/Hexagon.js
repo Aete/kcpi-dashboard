@@ -64,7 +64,7 @@ export default function Hexagon(element, width, height) {
   const drawChart = (element, data, color, main) => {
     let coordString = '';
     Object.entries(data)
-      .filter((data) => data[0] !== 'city')
+      .filter((data) => data[0] !== 'city' && data[0] !== 'overall')
       .forEach(([c, d], i) => {
         const { dx, dy } = convertCoord(c, d, rScale);
         element
@@ -127,6 +127,8 @@ export default function Hexagon(element, width, height) {
       .style('font-family', "'Nanum Gothic', sans-serif")
       .style('font-weight', 700)
       .style('font-size', '13px');
+
+    element.select('.city-tag').text(city);
   };
 }
 

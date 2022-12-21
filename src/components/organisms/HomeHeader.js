@@ -1,7 +1,11 @@
 import { useRef } from 'react';
 import styled from 'styled-components';
 import { Background, Black, BlueGray900 } from '../../utils/colors';
-import { kcpiDescription } from '../../utils/text/home';
+import {
+  kcpiDescription,
+  kcpiIntroduction,
+  kcpiIntroTwo,
+} from '../../utils/text/home';
 import { TextHeader } from '../atoms/text';
 import { HeaderChapterTitle, KCPITitle } from '../atoms/titles';
 
@@ -25,6 +29,7 @@ const HeaderContainer = styled.header`
 
   & span {
     cursor: pointer;
+    font-weight: 600;
   }
 
   & .shrink {
@@ -49,7 +54,7 @@ export default function HomeHeader() {
   const headerRef = useRef();
 
   const handleClick = () => {
-    console.log(headerRef.current.classList.toggle('detail'));
+    headerRef.current.classList.toggle('detail');
   };
   return (
     <HeaderContainer ref={headerRef}>
@@ -68,6 +73,10 @@ export default function HomeHeader() {
         </span>
       </TextHeader>
       <HeaderChapterTitle>개요</HeaderChapterTitle>
+
+      <TextHeader>{kcpiIntroduction}</TextHeader>
+
+      <TextHeader>{kcpiIntroTwo}</TextHeader>
     </HeaderContainer>
   );
 }

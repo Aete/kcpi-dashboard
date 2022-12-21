@@ -2,19 +2,15 @@ import * as d3 from 'd3';
 import {
   Black400,
   BlueMyFavorite,
-  LightGray100,
   Red,
   Yellow,
   LightGray350,
+  Black,
 } from '../../../../utils/colors';
 
 import { calculateOverallEntry, data } from '../../../../utils/data/data';
 
 export default function OverallChart(element, setSCity, setHCity) {
-  const overallAvg =
-    calculateOverallEntry(data).reduce((acc, item) => (acc += item[1]), 0) /
-    data.length;
-
   const calculateAvg = (d, attr) => {
     return d.reduce((acc, c) => acc + c[attr], 0) / d.length;
   };
@@ -112,9 +108,21 @@ export default function OverallChart(element, setSCity, setHCity) {
     .attr('opacity', 0.9);
 
   bar
+    .selectAll('.anno')
+    .data(dataProcessed)
+    .join('text')
+    .attr('class', (d) => (d.city !== '평균' ? 'bar-anno' : 'bar-anno-avg'))
+    .attr('x', (d) => xScale(d.city) + 5)
+    .attr('y', (d) => yScale(d.overall) - 8)
+    .style('font-size', '12px')
+    .style('font-weight', (d) => (d.city === '평균' ? 700 : 400))
+    .attr('fill', (d) => (d.city === '평균' ? Yellow : LightGray350))
+    .text((d) => d.overall);
+
+  bar
     .selectAll('.bar')
     .on('click', function () {
-      const city = d3.select(this).data()[0][0];
+      const city = d3.select(this).data()[0].city;
       if (city !== store.city) {
         setSCity(city);
         return;
@@ -129,6 +137,7 @@ export default function OverallChart(element, setSCity, setHCity) {
     })
     .on('mouseout', function () {
       const city = d3.select(this).data()[0].city;
+
       setHCity(null);
       if (city !== store.city) d3.select(this).attr('fill', LightGray350);
     });
@@ -141,10 +150,14 @@ export default function OverallChart(element, setSCity, setHCity) {
     }
 
     const selected = d3.selectAll('.bar').filter((d) => d.city === sCity);
+    const selectedAnno = d3
+      .selectAll('.bar-anno')
+      .filter((d) => d.city === sCity);
 
     if (sCity !== store.city) {
       d3.selectAll('.bar').attr('fill', LightGray350);
       selected.attr('fill', BlueMyFavorite);
+      selectedAnno.attr('fill', BlueMyFavorite).style('font-weight', 700);
       store.city = sCity;
     } else {
       d3.selectAll('.bar').attr('fill', LightGray350);
@@ -158,8 +171,19 @@ export default function OverallChart(element, setSCity, setHCity) {
       d3.selectAll('.bar')
         .filter((d) => d.city !== store.city)
         .attr('fill', LightGray350);
+
+      d3.selectAll('.bar-anno')
+        .filter((d) => d.city !== store.city)
+        .attr('fill', LightGray350)
+        .style('font-weight', 400);
+
       const selected = d3.selectAll('.bar').filter((d) => d.city === city);
+      const selectedAnno = d3
+        .selectAll('.bar-anno')
+        .filter((d) => d.city === city);
+
       selected.attr('fill', Red);
+      selectedAnno.attr('fill', Red).style('font-weight', 700);
     } else {
       d3.selectAll('.bar')
         .filter((d) => d.city !== store.city)

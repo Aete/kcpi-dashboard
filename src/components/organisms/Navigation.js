@@ -1,7 +1,9 @@
 import styled from 'styled-components';
 import { Background, Black } from '../../utils/colors';
 import { pc, tablet } from '../../utils/media';
-
+import { NavImg } from '../atoms/NavImg';
+import NavIcon from '../molecules/NavIcon';
+import HomeIconSVG from '../../utils/imgs/home.svg';
 export const NavWidthTab = `${75}px`;
 
 const NavContainer = styled.div`
@@ -24,5 +26,13 @@ const NavContainer = styled.div`
 `;
 
 export default function Navigation() {
-  return <NavContainer>test</NavContainer>;
+  return (
+    <NavContainer>
+      <NavIcon isActive={'y'} text={'Home'} />
+      <NavIcon isActive={'n'} text={'프로젝트 소개'} />
+
+      <NavIcon isActive={'n'} text={'도시별 분석'} />
+      <NavIcon isActive={'n'} text={'지표별 분석'} />
+    </NavContainer>
+  );
 }
