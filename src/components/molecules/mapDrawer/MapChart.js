@@ -132,6 +132,10 @@ export default function MapChart(element, setSCity, setHCity, sCity) {
         )
         .style('display', 'inline');
 
+      boxContainer.select('.link text').on('click', (e) => {
+        console.log(city);
+      });
+
       d3.selectAll('.sido').attr('fill', LightGray100);
 
       store.city = city;
