@@ -82,7 +82,7 @@ export const data = [
     ugl: 51,
   },
   {
-    city: '제주도',
+    city: '제주',
     p: 41,
     infra: 89,
     qol: 68,
@@ -91,7 +91,7 @@ export const data = [
     ugl: 53,
   },
   {
-    city: '경기도',
+    city: '경기',
     p: 55,
     infra: 46,
     qol: 58,
@@ -100,7 +100,7 @@ export const data = [
     ugl: 77,
   },
   {
-    city: '경상북도',
+    city: '경북',
     p: 66,
     infra: 69,
     qol: 67,
@@ -109,7 +109,7 @@ export const data = [
     ugl: 88,
   },
   {
-    city: '경상남도',
+    city: '경남',
     p: 47,
     infra: 51,
     qol: 59,
@@ -118,7 +118,7 @@ export const data = [
     ugl: 95,
   },
   {
-    city: '충청북도',
+    city: '충북',
     p: 56,
     infra: 46,
     qol: 83,
@@ -127,7 +127,7 @@ export const data = [
     ugl: 88,
   },
   {
-    city: '충청남도',
+    city: '충남',
     p: 99,
     infra: 66,
     qol: 88,
@@ -136,7 +136,7 @@ export const data = [
     ugl: 42,
   },
   {
-    city: '전라북도',
+    city: '전북',
     p: 79,
     infra: 59,
     qol: 58,
@@ -145,7 +145,7 @@ export const data = [
     ugl: 68,
   },
   {
-    city: '전라남도',
+    city: '전남',
     p: 78,
     infra: 87,
     qol: 68,
@@ -154,7 +154,7 @@ export const data = [
     ugl: 74,
   },
   {
-    city: '강원도',
+    city: '강원',
     p: 61,
     infra: 66,
     qol: 86,

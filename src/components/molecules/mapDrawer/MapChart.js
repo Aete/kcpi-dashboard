@@ -88,6 +88,25 @@ export default function MapChart(element, setSCity, setHCity, sCity) {
       });
 
     this.redraw(sCity);
+
+    const anno = mapContainer.append('g').attr('class', 'anno');
+
+    anno
+      .selectAll('.properties')
+      .data([
+        'P: 생산성',
+        'ID: 인프라 개발',
+        'QoL: 삶의 질',
+        'ESI: 공정과 사회통합',
+        'ES: 환경적 지속가능성',
+        'UGL: 도시화 거버넌스',
+      ])
+      .join('text')
+      .text((d) => d)
+      .attr('x', width - 200)
+      .attr('y', (d, i) => height - 220 + i * 19)
+      .style('font-size', '12px')
+      .style('font-family', `'Nanum Gothic', sans-serif`);
   });
 
   this.redraw = (city) => {
@@ -117,7 +136,9 @@ export default function MapChart(element, setSCity, setHCity, sCity) {
 
       store.city = city;
       selected.attr('fill', Black);
+
       const cityData = store.cityData.filter((c) => c.city === city)[0];
+      console.log(city, cityData);
       Chart.draw(cityData);
     }
   };

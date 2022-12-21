@@ -11,7 +11,6 @@ const DashboardContainer = styled.div`
   display: flex;
   flex-direction: column;
   padding: 0 20px;
-
   @media screen and (${pc}) {
     flex-direction: row;
     padding: 0 0 0 20px;
@@ -27,15 +26,15 @@ const sido = [
   '광주',
   '울산',
   '세종',
-  '제주도',
-  '경기도',
-  '경상북도',
-  '경상남도',
-  '충청북도',
-  '충청남도',
-  '전라북도',
-  '전라남도',
-  '강원도',
+  '제주',
+  '경기',
+  '경북',
+  '경남',
+  '충북',
+  '충남',
+  '전북',
+  '전남',
+  '강원',
 ];
 
 function getRandomInt(max) {
@@ -43,7 +42,7 @@ function getRandomInt(max) {
 }
 
 export default function Dashboard() {
-  const [height, setHeight] = useState(window.innerHeight - 180);
+  const [height, setHeight] = useState(window.innerHeight - 140);
   const [sCity, setSCity] = useState(sido[getRandomInt(17)]);
   const [hCity, setHCity] = useState(null);
 

@@ -8,9 +8,10 @@ export const DarkGray = '#001f2a';
 export const Blue = '#2196f3';
 export const Blue50 = '#e3f2fd';
 export const Blue200 = '#90caf9';
+export const Blue300 = '#64b5f6';
 export const Blue700 = '#1976d7';
 export const Blue900 = '#0d47a1';
-export const BlueMyFavorite = '#0058ca';
+export const BlueMyFavorite = '#0d47a1';
 export const BlueMyFavoriteText = '#001945';
 
 export const Background = '#fff';
@@ -29,6 +30,6 @@ export const Black600 = '#757575';
 
 export const LightGray = '#e2dfdf';
 
-export const Red = '#f44336';
+export const Red = Blue;
 
-export const Yellow = '#ffb74d';
+export const Yellow = '#00acc1';

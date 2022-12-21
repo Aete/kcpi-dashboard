@@ -11,6 +11,35 @@ import {
 import { calculateOverallEntry, data } from '../../../../utils/data/data';
 
 export default function OverallChart(element, setSCity, setHCity) {
+  const overallAvg =
+    calculateOverallEntry(data).reduce((acc, item) => (acc += item[1]), 0) /
+    data.length;
+
+  const calculateAvg = (d, attr) => {
+    return d.reduce((acc, c) => acc + c[attr], 0) / d.length;
+  };
+
+  const averageObject = [
+    'overall',
+    'p',
+    'infra',
+    'qol',
+    'esi',
+    'es',
+    'ugl',
+  ].reduce((acc, attr) => {
+    acc[attr] = calculateAvg(data, attr);
+    return acc;
+  }, {});
+
+  averageObject.city = '평균';
+
+  const dataProcessed = [...data, averageObject].sort(
+    (a, b) => b.overall - a.overall
+  );
+
+  const cities = dataProcessed.map((d) => d.city);
+
   const height = element.clientHeight;
   const width = element.clientWidth;
   const margin = { top: 10, bottom: 20, right: 15, left: 15 };
@@ -31,11 +60,11 @@ export default function OverallChart(element, setSCity, setHCity) {
   const xAxis = container
     .append('g')
     .attr('id', 'xAxis')
-    .attr('transform', `translate(0,${height - margin.top - margin.bottom})`);
+    .attr('transform', `translate(0,${height - margin.top - margin.bottom})`)
+    .style('font-size', '11px');
 
   const yAxis = container.append('g').attr('id', 'yAxis');
   const bar = container.append('g');
-  const cities = data.map((d) => d.city);
   const xScale = d3
     .scaleBand()
     .domain(cities)
@@ -66,25 +95,24 @@ export default function OverallChart(element, setSCity, setHCity) {
     .attr('stroke-width', (d) => (d > 0 ? 1 : 0.5))
     .attr('stroke-dasharray', (d) => (d > 0 ? '4,4' : 'none'));
 
-  const overallAvg =
-    calculateOverallEntry(data).reduce((acc, item) => (acc += item[1]), 0) /
-    data.length;
-
   bar
     .selectAll('rect')
-    .data(calculateOverallEntry(data))
+    .data(dataProcessed)
     .enter()
     .append('rect')
-    .attr('class', 'bar')
+    .attr('class', (d) => (d.city !== '평균' ? 'bar' : 'barAvg'))
     .attr('width', xScale.bandwidth())
     .attr(
       'height',
-      ([_, value]) => height - yScale(value) - margin.top - margin.bottom
+      (d) => height - yScale(d.overall) - margin.top - margin.bottom
     )
-    .attr('x', ([key, _]) => xScale(key))
-    .attr('y', ([_, value]) => yScale(value))
-    .attr('fill', LightGray350)
-    .attr('opacity', 0.9)
+    .attr('x', (d) => xScale(d.city))
+    .attr('y', (d) => yScale(d.overall))
+    .attr('fill', (d) => (d.city !== '평균' ? LightGray350 : Yellow))
+    .attr('opacity', 0.9);
+
+  bar
+    .selectAll('.bar')
     .on('click', function () {
       const city = d3.select(this).data()[0][0];
       if (city !== store.city) {
@@ -95,25 +123,15 @@ export default function OverallChart(element, setSCity, setHCity) {
       }
     })
     .on('mouseover', function () {
-      const city = d3.select(this).data()[0][0];
+      const city = d3.select(this).data()[0].city;
       setHCity(city);
       if (city !== store.city) d3.select(this).attr('fill', Red);
     })
     .on('mouseout', function () {
-      const city = d3.select(this).data()[0][0];
+      const city = d3.select(this).data()[0].city;
       setHCity(null);
       if (city !== store.city) d3.select(this).attr('fill', LightGray350);
     });
-
-  bar
-    .append('line')
-    .attr('stroke', Yellow)
-    .attr('x1', 0)
-    .attr('x2', width - margin.right - margin.left)
-    .attr('y1', yScale(overallAvg))
-    .attr('y2', yScale(overallAvg))
-    .attr('stroke-dasharray', '8,8')
-    .attr('stroke-width', 2);
 
   this.update = (sCity) => {
     if (!sCity) {
@@ -122,7 +140,7 @@ export default function OverallChart(element, setSCity, setHCity) {
       return;
     }
 
-    const selected = d3.selectAll('.bar').filter((d) => d[0] === sCity);
+    const selected = d3.selectAll('.bar').filter((d) => d.city === sCity);
 
     if (sCity !== store.city) {
       d3.selectAll('.bar').attr('fill', LightGray350);
@@ -138,13 +156,13 @@ export default function OverallChart(element, setSCity, setHCity) {
   this.updateHover = (city) => {
     if (city !== store.city) {
       d3.selectAll('.bar')
-        .filter((d) => d[0] !== store.city)
+        .filter((d) => d.city !== store.city)
         .attr('fill', LightGray350);
-      const selected = d3.selectAll('.bar').filter((d) => d[0] === city);
+      const selected = d3.selectAll('.bar').filter((d) => d.city === city);
       selected.attr('fill', Red);
     } else {
       d3.selectAll('.bar')
-        .filter((d) => d[0] !== store.city)
+        .filter((d) => d.city !== store.city)
         .attr('fill', Black400);
     }
   };

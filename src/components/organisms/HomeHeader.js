@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { Background, Black, BlueGray900 } from '../../utils/colors';
 import { kcpiDescription } from '../../utils/text/home';
 import { TextHeader } from '../atoms/text';
-import { KCPITitle } from '../atoms/titles';
+import { HeaderChapterTitle, KCPITitle } from '../atoms/titles';
 
 const HeaderContainer = styled.header`
   width: 100%;
@@ -16,6 +16,7 @@ const HeaderContainer = styled.header`
   border-bottom: 1px solid ${Black};
   color: ${Black};
   transition: height 0.7s ease-out;
+  overflow-y: hidden;
 
   &.detail {
     height: 100vh;
@@ -66,6 +67,7 @@ export default function HomeHeader() {
           (감추기)
         </span>
       </TextHeader>
+      <HeaderChapterTitle>개요</HeaderChapterTitle>
     </HeaderContainer>
   );
 }

@@ -12,7 +12,7 @@
         "id": null,
         "UFID": "ARB0100000000001E",
         "BJCD": "5000000000",
-        "NAME": "제주도",
+        "NAME": "제주",
         "DIVI": "HJD004",
         "SCLS": null,
         "FMTA": null
@@ -56,7 +56,7 @@
         "id": null,
         "UFID": "ARB0100000000002F",
         "BJCD": "4800000000",
-        "NAME": "경상남도",
+        "NAME": "경남",
         "DIVI": "HJD004",
         "SCLS": null,
         "FMTA": null
@@ -232,7 +232,7 @@
         "id": null,
         "UFID": "ARB0100000000003G",
         "BJCD": "4700000000",
-        "NAME": "경상북도",
+        "NAME": "경북",
         "DIVI": "HJD004",
         "SCLS": null,
         "FMTA": null
@@ -384,7 +384,7 @@
         "id": null,
         "UFID": "ARB0100000000004H",
         "BJCD": "4600000000",
-        "NAME": "전라남도",
+        "NAME": "전남",
         "DIVI": "HJD004",
         "SCLS": null,
         "FMTA": null
@@ -740,7 +740,7 @@
         "id": null,
         "UFID": "ARB0100000000005I",
         "BJCD": "4500000000",
-        "NAME": "전라북도",
+        "NAME": "전북",
         "DIVI": "HJD004",
         "SCLS": null,
         "FMTA": null
@@ -852,7 +852,7 @@
         "id": null,
         "UFID": "ARB0100000000006J",
         "BJCD": "4400000000",
-        "NAME": "충청남도",
+        "NAME": "충남",
         "DIVI": "HJD004",
         "SCLS": null,
         "FMTA": null
@@ -975,7 +975,7 @@
         "id": null,
         "UFID": "ARB0100000000007K",
         "BJCD": "4300000000",
-        "NAME": "충청북도",
+        "NAME": "충북",
         "DIVI": "HJD004",
         "SCLS": null,
         "FMTA": null
@@ -1081,7 +1081,7 @@
         "id": null,
         "UFID": "ARB0100000000008L",
         "BJCD": "4200000000",
-        "NAME": "강원도",
+        "NAME": "강원",
         "DIVI": "HJD004",
         "SCLS": null,
         "FMTA": null
@@ -1198,7 +1198,7 @@
         "id": null,
         "UFID": "ARB0100000000009M",
         "BJCD": "4100000000",
-        "NAME": "경기도",
+        "NAME": "경기",
         "DIVI": "HJD004",
         "SCLS": null,
         "FMTA": null
