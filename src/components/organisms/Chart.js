@@ -41,7 +41,7 @@ function getRandomInt(max) {
   return Math.floor(Math.random() * max);
 }
 
-export default function Dashboard() {
+export default function Dashboard({ handleModule }) {
   const [height, setHeight] = useState(window.innerHeight - 140);
   const [sCity, setSCity] = useState(sido[getRandomInt(17)]);
   const [hCity, setHCity] = useState(null);
@@ -53,6 +53,7 @@ export default function Dashboard() {
         hCity={hCity}
         setHCity={setHCity}
         setSCity={setSCity}
+        handleModule={handleModule}
       />
       <ChartSet
         sCity={sCity}

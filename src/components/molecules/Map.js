@@ -15,13 +15,27 @@ const MapContainer = styled.div`
   }
 `;
 
-export default function Map({ sCity, hCity, setHCity, setSCity }) {
+export default function Map({
+  sCity,
+  hCity,
+  setHCity,
+  setSCity,
+  handleModule,
+}) {
   const [map, setMap] = useState(null);
   const mapContainer = useRef();
 
   useEffect(() => {
     if (!map) {
-      setMap(new MapChart(mapContainer.current, setSCity, setHCity, sCity));
+      setMap(
+        new MapChart(
+          mapContainer.current,
+          setSCity,
+          setHCity,
+          sCity,
+          handleModule
+        )
+      );
     } else {
       map.redraw(sCity);
     }

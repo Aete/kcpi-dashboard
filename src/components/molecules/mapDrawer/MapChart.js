@@ -11,7 +11,13 @@ import cityData from '../../../utils/data/sample.csv';
 import Tooltip from './Tooltip';
 import { data } from '../../../utils/data/data';
 
-export default function MapChart(element, setSCity, setHCity, sCity) {
+export default function MapChart(
+  element,
+  setSCity,
+  setHCity,
+  sCity,
+  handleModule
+) {
   const store = {
     city: null,
     projection: null,
@@ -40,7 +46,7 @@ export default function MapChart(element, setSCity, setHCity, sCity) {
   const tooltipWidth = 180;
 
   // create the Tooltip and Chart elements
-  const boxContainer = Tooltip(container, tooltipWidth);
+  const boxContainer = Tooltip(container, tooltipWidth, handleModule);
   const Chart = new Hexagon(boxContainer, tooltipWidth, 1.2 * tooltipWidth);
 
   // load data and draw the map + events
@@ -131,10 +137,6 @@ export default function MapChart(element, setSCity, setHCity, sCity) {
           ]})`
         )
         .style('display', 'inline');
-
-      boxContainer.select('.link text').on('click', (e) => {
-        console.log(city);
-      });
 
       d3.selectAll('.sido').attr('fill', LightGray100);
 

@@ -13,6 +13,7 @@ const NavContainer = styled.div`
   background-color: ${Background};
 
   position: absolute;
+  z-index: 1;
   left: -${NavWidthTab};
   top: 0;
 

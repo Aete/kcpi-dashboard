@@ -5,7 +5,7 @@ import {
   Yellow,
 } from '../../../utils/colors';
 
-export default function Tooltip(element, tooltipWidth) {
+export default function Tooltip(element, tooltipWidth, handleModule) {
   const boxContainer = element
     .append('g')
     .attr('class', 'box')
@@ -38,7 +38,8 @@ export default function Tooltip(element, tooltipWidth) {
     .attr('x', tooltipWidth - 65)
     .attr('y', 20)
     .style('font-size', '10px')
-    .style('cursor', 'pointer');
+    .style('cursor', 'pointer')
+    .on('click', handleModule);
 
   boxContainer
     .append('line')
