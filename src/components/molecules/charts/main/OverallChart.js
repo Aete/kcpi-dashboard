@@ -6,6 +6,8 @@ import {
   Yellow,
   LightGray350,
   Black,
+  LightGray100,
+  Background,
 } from '../../../../utils/colors';
 
 import { calculateOverallEntry, data } from '../../../../utils/data/data';
@@ -38,9 +40,10 @@ export default function OverallChart(element, setSCity, setHCity) {
 
   const height = element.clientHeight;
   const width = element.clientWidth;
-  const margin = { top: 10, bottom: 20, right: 15, left: 15 };
+  const margin = { top: 50, bottom: 20, right: 15, left: 15 };
   const store = {
     city: null,
+    mode: 'o',
   };
 
   const svg = d3
@@ -48,19 +51,45 @@ export default function OverallChart(element, setSCity, setHCity) {
     .append('svg')
     .attr('viewBox', '0 0 ' + width + ' ' + height);
 
-  const container = svg
+  const container = svg.append('g').attr('class', 'container');
+
+  const chart = container
     .append('g')
-    .attr('class', 'chart')
+    .attr('class', 'container')
     .attr('transform', `translate(${margin.left}, ${margin.top})`);
 
-  const xAxis = container
+  const ModeBtn = container
+    .selectAll('mode-btn')
+    .data(['o', 'p', 'infra', 'esi', 'es', 'ugl'])
+    .join('g')
+    .style('font-family', "'Nanum Gothic', sans-serif")
+    .style('font-weight', 700)
+    .style('font-size', '12px');
+
+  ModeBtn.append('circle')
+    .attr('stroke', (d) => (d === store.mode ? Black : LightGray350))
+    .attr('fill', (d) => (d === store.mode ? Black : 'none'))
+    .attr('r', 15)
+    .attr('cx', (d, i) => 45 * i + 30)
+    .attr('cy', 25);
+
+  ModeBtn.append('text')
+    .attr('text-anchor', 'middle')
+    .text((d) => d.toUpperCase())
+    .attr('y', 29)
+    .attr('x', (d, i) => 45 * i + 30)
+    .style('font-weight', 900)
+    .attr('fill', (d) => (d === store.mode ? Background : LightGray350));
+
+  // Drawing Axis and Grid
+  const xAxis = chart
     .append('g')
     .attr('id', 'xAxis')
     .attr('transform', `translate(0,${height - margin.top - margin.bottom})`)
     .style('font-size', '11px');
 
-  const yAxis = container.append('g').attr('id', 'yAxis');
-  const bar = container.append('g');
+  const yAxis = chart.append('g').attr('id', 'yAxis');
+
   const xScale = d3
     .scaleBand()
     .domain(cities)
@@ -91,6 +120,10 @@ export default function OverallChart(element, setSCity, setHCity) {
     .attr('stroke-width', (d) => (d > 0 ? 1 : 0.5))
     .attr('stroke-dasharray', (d) => (d > 0 ? '4,4' : 'none'));
 
+  // Drawing Bar Chart
+
+  const bar = chart.append('g');
+
   bar
     .selectAll('rect')
     .data(dataProcessed)
@@ -113,7 +146,7 @@ export default function OverallChart(element, setSCity, setHCity) {
     .join('text')
     .attr('text-anchor', 'middle')
     .attr('class', (d) => (d.city !== '평균' ? 'bar-anno' : 'bar-anno-avg'))
-    .attr('x', (d) => xScale(d.city) + 16)
+    .attr('x', (d) => xScale(d.city) + xScale.bandwidth() / 2)
     .attr('y', (d) => yScale(d.overall) - 8)
     .style('font-size', '12px')
     .style('font-weight', (d) => (d.city === '평균' ? 700 : 400))
