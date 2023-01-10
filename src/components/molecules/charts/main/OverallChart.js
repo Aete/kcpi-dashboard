@@ -40,7 +40,7 @@ export default function OverallChart(element, setSCity, setHCity) {
 
   const height = element.clientHeight;
   const width = element.clientWidth;
-  const margin = { top: 50, bottom: 20, right: 15, left: 15 };
+  const margin = { top: 0, bottom: 20, right: 15, left: 15 };
   const store = {
     city: null,
     mode: 'o',
@@ -64,7 +64,8 @@ export default function OverallChart(element, setSCity, setHCity) {
     .join('g')
     .style('font-family', "'Nanum Gothic', sans-serif")
     .style('font-weight', 700)
-    .style('font-size', '12px');
+    .style('font-size', '12px')
+    .style('display', 'none');
 
   ModeBtn.append('circle')
     .attr('stroke', (d) => (d === store.mode ? Black : LightGray350))
